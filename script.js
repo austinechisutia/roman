@@ -30,15 +30,21 @@ convertBtn.addEventListener("click", function() {
     } else if(numberInput<0){
         output.textContent = 'Add a number more than 0'
     } else {
-        let romanStore = '';
-        let numeral = numberInput
-        
-        for(let i = 0; i<romanNumber.length; i++){
-            while(numeral>=romanNumber[i].num){
-                romanStore+=romanNumber[i].roman;
-                numeral-=romanNumber[i].num
+        let romanStore = "";
+        let realNum = parseInt(numberInput);
+
+        for(let i=0; i<romanNumber.length; i++){
+            const times = Math.floor(realNum/romanNumber[i].num)
+
+            if(times>0){
+                romanStore += romanNumber[i].roman.repeat(times);
+                realNum -= romanNumber[i].num*times
             }
+            
+            
         }
+
         output.textContent = romanStore
+
     }
 })
