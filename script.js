@@ -1,88 +1,44 @@
-const numbers = [
-    {
-        roman: 'M',
-        value: 1000
-    },
-    {
-    roman: 'CM',
-    value: 900
-},
-{
-    roman: 'D',
-    value: 500
-},
-{
-    roman: 'CD',
-    value: 400
-},
-{
-    roman: 'C',
-    value: 100
-},
-{
-    roman: 'XC',
-    value: 90
-},
-{
-    roman: 'L',
-    value: 50
-},
-{
-    roman: 'XL',
-    value: 40
-},
-{
-    roman: 'X',
-    value: 10
-},
-{
-    roman: 'IX',
-    value: 9
-},
-{
-    roman: 'V',
-    value: 5
-},
-{
-    roman: 'IV',
-    value: 4
-},
-{
-    roman: 'I',
-    value: 1
-}
+
+const romanNumber = [
+    {num:1000, roman: "M"},
+    {num:900, roman: "CM"},
+    {num:500, roman: "D"},
+    {num:400, roman: "CD"},
+    {num:100, roman: "M"},
+    {num:90, roman: "XM"},
+    {num:50, roman: "L"},
+    {num:40, roman: "XL"},
+    {num:10, roman: "X"},
+    {num:9, roman: "IX"},
+    {num:5, roman: "V"},
+    {num:4, roman: "IV"},
+    {num:1, roman: "I"},
+
 ]
 
+const number = document.getElementById("number")
+const convertBtn = document.getElementById("convert-btn")
+const output = document.getElementById("output")
 
 
-// DOM Elements
-const numberInput = document.getElementById('number');
-const convertBtn = document.getElementById('convert-btn');
-const outputDiv = document.getElementById('output');
 
+convertBtn.addEventListener("click", function() {
+    const numberInput = number.value.trim()
 
-convertBtn.addEventListener('click', () => {
-    const number = parseInt(numberInput.value);
-    
-    if(number === ""){
-        outputDiv.textContent = "Please enter a number";
-    } else if(number < 0 || number >= 4000){
-        outputDiv.textContent = "Please enter a number between 0 and 4000";
+    if(numberInput===""){
+        output.textContent = 'Add a number'
+    } else if(numberInput<0){
+        output.textContent = 'Add a number more than 0'
     } else {
-        let result = "";
-        let num = number;
+        let romanStore = '';
+        let numeral = numberInput
         
-        for (let i = 0; i < numbers.length; i++) {
-            while (num >= numbers[i].value) {
-                result += numbers[i].roman;
-                num -= numbers[i].value;
-
+        for(let i = 0; i<romanNumber.length; i++){
+            while(numeral>=romanNumber[i].num){
+                romanStore+=romanNumber[i].roman;
+                numeral-=romanNumber[i].num
             }
         }
-        
-        outputDiv.textContent = result;
+        output.textContent = romanStore
     }
-});
-
-
-
+})
